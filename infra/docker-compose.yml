@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15
+    container_name: bip-db
+    environment:
+      POSTGRES_DB: bip_db
+      POSTGRES_USER: bip
+      POSTGRES_PASSWORD: bip
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  wildfly:
+    build: .
+    container_name: bip-wildfly
+    depends_on:
+      - db
+    environment:
+      TZ: "America/Sao_Paulo"
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+    volumes:
+      - ../ejb-module/target/ejb-module-1.0.0-SNAPSHOT.jar:/opt/jboss/wildfly/standalone/deployments/ejb-module.jar
+    command: >
+      bash -c "/opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0"
+
+volumes:
+  pgdata:

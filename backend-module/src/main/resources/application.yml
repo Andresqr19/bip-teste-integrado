@@ -1,0 +1,26 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: backend
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/bip_db
+    username: bip
+    password: bip
+  jpa:
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  ejb:
+    host: localhost
+    port: 8080
+    user: admin
+    password: Admin#123

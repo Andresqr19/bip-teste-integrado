@@ -1,0 +1,43 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>Transferência entre Benefícios</mat-card-title>
+    <mat-card-subtitle>Defina origem, destino e valor</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form" class="form-grid" (ngSubmit)="submit()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Origem</mat-label>
+        <mat-select formControlName="fromId">
+          <mat-option *ngFor="let b of beneficios" [value]="b.id">{{ b.nome }} (#{{b.id}})</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Destino</mat-label>
+        <mat-select formControlName="toId">
+          <mat-option *ngFor="let b of beneficios" [value]="b.id">{{ b.nome }} (#{{b.id}})</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Valor</mat-label>
+        <input matInput type="number" step="0.01" formControlName="amount" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Modo de Lock</mat-label>
+        <mat-select formControlName="lockingMode">
+          <mat-option *ngFor="let m of lockingModes" [value]="m.value">{{ m.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <a mat-button routerLink="/">Cancelar</a>
+    <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">Transferir</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,57 @@
+<div class="header">
+  <h2>Benefícios</h2>
+  <a mat-raised-button color="primary" routerLink="/novo">
+    <mat-icon>add</mat-icon>&nbsp;Novo
+  </a>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="!loading; else skeleton">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let e">{{e.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef>Nome</th>
+    <td mat-cell *matCellDef="let e">{{e.nome}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="descricao">
+    <th mat-header-cell *matHeaderCellDef>Descrição</th>
+    <td mat-cell *matCellDef="let e">{{e.descricao}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="valor">
+    <th mat-header-cell *matHeaderCellDef>Valor</th>
+    <td mat-cell *matCellDef="let e">{{e.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ativo">
+    <th mat-header-cell *matHeaderCellDef>Ativo</th>
+    <td mat-cell *matCellDef="let e">{{ e.ativo ? 'Sim' : 'Não' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <th mat-header-cell *matHeaderCellDef>Ações</th>
+    <td mat-cell *matCellDef="let e">
+      <button
+        mat-icon-button
+        color="primary"
+        [routerLink]="['/editar', e.id]"
+        aria-label="Editar">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deletar(e.id)" aria-label="Excluir">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<ng-template #skeleton>
+  <p>Carregando...</p>
+</ng-template>

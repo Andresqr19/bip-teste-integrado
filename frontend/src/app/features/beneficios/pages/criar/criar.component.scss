@@ -1,0 +1,17 @@
+.card {
+  max-width: 680px;
+  margin: 16px auto;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  mat-form-field { width: 100%; }
+  mat-checkbox { align-self: center; }
+}
+
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,7 @@
+embed-server --server-config=standalone.xml --std-out=echo
+
+/subsystem=remoting/http-connector=http-remoting-connector:add(connector-ref=http,security-realm=ApplicationRealm)
+/subsystem=ejb3/service=remote:add(connector-ref=http-remoting-connector,thread-pool-name=default)
+/subsystem=ejb3:write-attribute(name=default-missing-method-permissions-deny-access,value=false)
+
+stop-embedded-server

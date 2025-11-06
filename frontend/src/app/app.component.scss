@@ -1,0 +1,30 @@
+.shell {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 260px;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.topbar .title {
+  font-weight: 600;
+}
+
+.page {
+  padding: 16px;
+}
+
+.spacer { flex: 1 1 auto; }
+
+.hide-desktop {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .hide-desktop { display: inline-flex; }
+}

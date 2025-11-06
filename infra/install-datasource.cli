@@ -1,0 +1,21 @@
+embed-server --std-out=echo
+
+module add --name=org.postgresql \
+ --resources=/opt/jboss/wildfly/modules/system/layers/base/org/postgresql/main/postgresql-42.7.3.jar \
+ --dependencies=java.base,javax.api,javax.transaction.api
+
+/subsystem=datasources/jdbc-driver=postgresql:add( \
+driver-name=postgresql, \
+driver-module-name=org.postgresql, \
+driver-class-name=org.postgresql.Driver)
+
+data-source add \
+ --name=BipDS \
+ --jndi-name=java:/jdbc/BipDS \
+ --connection-url=jdbc:postgresql://bip-db:5432/bip_db \
+ --driver-name=postgresql \
+ --user-name=bip \
+ --password=bip \
+ --enabled=true
+
+stop-embedded-server

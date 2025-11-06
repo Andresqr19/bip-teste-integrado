@@ -1,0 +1,20 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="bipPU" transaction-type="JTA">
+        <jta-data-source>java:/jdbc/BipDS</jta-data-source>
+
+        <class>com.example.ejb.domain.model.Beneficio</class>
+        <class>com.example.ejb.domain.model.BeneficioTransferLog</class>
+
+        <properties>
+            <property name="jakarta.persistence.schema-generation.database.action" value="none" />
+            <property name="jakarta.persistence.lock.timeout" value="30000"/>
+            <property name="jakarta.persistence.query.timeout" value="30000"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

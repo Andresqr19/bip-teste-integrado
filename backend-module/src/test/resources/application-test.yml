@@ -1,0 +1,9 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+ejb:
+  host: dummy
+  port: 0
+  user: test
+  password: test
